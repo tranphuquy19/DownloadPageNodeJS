@@ -1,17 +1,17 @@
 var express = require('express');
 var fs = require('fs');
+var fsize = require('filesize');
+var path = require('path');
 
 var contents = fs.readFileSync('app.json', 'utf8');
+
 var jsonObj = JSON.parse(contents);
 
 var rootPath = jsonObj.dirPath;
-var fileName2 = jsonObj.fileName;
-var fileSize = jsonObj.fileSize;
 
 var router = express.Router();
 
 function initFiles(path) {
-  console.log("initFiles is working");
   var _files = [];
 
   fs.readdirSync(path).forEach(file => {
@@ -26,10 +26,10 @@ function initFiles(path) {
 
     if (!_file.type) {
       const rarFileBytes = fs.statSync(__dirPath);
-      var sizeGB = rarFileBytes.size / 1000000000;
-      _file.size = Math.round(sizeGB * 100) / 100;
+      //console.log(rarFileBytes);
+      _file.size = fsize(rarFileBytes.size, { round: 0 });
     } else {
-      _file.size = 'NaN';
+      _file.size = '';
     }
     _files.push(_file);
   });
@@ -37,24 +37,39 @@ function initFiles(path) {
 }
 
 function renderHomepage(res, _path) {
+  contents = fs.readFileSync('app.json', 'utf8');
+
+  jsonObj = JSON.parse(contents);
+
+  rootPath = jsonObj.dirPath;
   var __files = initFiles(_path);
   res.render('index', { title: 'Doraneko', files: __files });
 }
 
 
 /* GET home page. */
+router.get('/browser', function (req, res, next) {
+  var _path;
+  if (req.query.p == null) _path = rootPath;
+  else _path = req.query.p;
+  if (_path.includes(rootPath.replace('/', '\\')))
+    renderHomepage(res, _path);
+  else render('filenotfound');
+});
+
 router.get('/', function (req, res, next) {
-  var _path = rootPath;
-  renderHomepage(res, _path);
+  res.redirect('/browser');
 });
 
-router.post('/', function (req, res) {
-  var _path = req.body.path;
-  renderHomepage(res, _path);
+router.get('/download', (req, res) => {
+  // if (include(fileName2, req.params.id) == true) res.download(filePath + req.params.id, req.params.id);
+  // else res.render('filenotfound');
+  //console.log(req.params.id);
+  //console.log("path is: " + req.query.p + "," + rootPath);
+  var _path = req.query.p;
+  var _options = req.query.o;
+  if (_path.includes(rootPath.replace('/', '\\')))
+    if(_options == 'download') res.download(_path, path.basename(_path));
+  else render('filenotfound');
 });
-
-// router.get('/download/:id', (req, res) => {
-//   if (include(fileName2, req.params.id) == true) res.download(filePath + req.params.id, req.params.id);
-//   else res.render('filenotfound');
-// });
 module.exports = router;
