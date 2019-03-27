@@ -54,7 +54,7 @@ router.get('/browser', function (req, res, next) {
   else _path = req.query.p;
   if (_path.includes(rootPath.replace('/', '\\')))
     renderHomepage(res, _path);
-  else render('filenotfound');
+  else res.render('filenotfound');
 });
 
 router.get('/', function (req, res, next) {
@@ -70,6 +70,6 @@ router.get('/download', (req, res) => {
   var _options = req.query.o;
   if (_path.includes(rootPath.replace('/', '\\')))
     if(_options == 'download') res.download(_path, path.basename(_path));
-  else render('filenotfound');
+  else res.render('filenotfound');
 });
 module.exports = router;
