@@ -42,72 +42,74 @@
       </form>
     </div>
   </nav>
-  <div class="container ml-0 mr-0 mt-2">
+  <div class="limiter">
+      <div class="container-table100 ml-0 mr-0 mt-2">
 
-    <div class="modal fade" id="confirmDownload" tabindex="-1" role="dialog" aria-labelledby="confirmDownloadTitle"
-      aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="confirmDownloadTitle">Confirm Download</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+          <div class="modal fade" id="confirmDownload" tabindex="-1" role="dialog" aria-labelledby="confirmDownloadTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="confirmDownloadTitle">Confirm Download</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <video controls class="player" id="player1" height="100%" width="100%" loop poster="/images/dora-bell.jpg"
+                    preload="none" src="" style="max-width: 100%" tabindex="0" title="MediaElement">
+                  </video>
+                </div>
+                <div class="modal-footer">
+                  <a class="btn btn-primary" href="" id="downloadBtn" role="button">Download</a>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="modal-body">
-            <video controls class="player" id="player1" height="100%" width="100%" loop poster="/images/dora-bell.jpg"
-              preload="none" src="" style="max-width: 100%" tabindex="0" title="MediaElement">
-            </video>
+          <div class="col-12">
+            <h2>List Files</h2>
           </div>
-          <div class="modal-footer">
-            <a class="btn btn-primary" href="" id="downloadBtn" role="button">Download</a>
+          <div class="wrap-table100">
+            <div class="table table-responsive-sm">
+              <div class="row header">
+                <div class="cell">#</div>
+                <div class="cell">File Name</div>
+                <div class="cell">Size</div>
+      
+              </div>
+              <% var count = 0;
+                      var sizeFile = 0;
+                      files.forEach(function(file){
+                      if(file.type){ count++;%>
+              <div class="row">
+                <div class="cell" data-title="Index: "><%= count %></div>
+                <div class="cell" data-title="Folder name: ">
+                  <span>
+                    <i class="fas fa-folder-open mr-2"></i>
+                    <a href="/browser/?p=<%= encodeURIComponent(file.path) %>" id="postPath"><%= file.name %></a>
+                  </span>
+                </div>
+                <div class="cell" data-title="Size: "><%= file.size %></div>
+              </div>
+              <% }%>
+              <% });%>
+              <% files.forEach(function(file){ 
+                      if(!file.type){ count++;%>
+              <div class="row">
+                <div class="cell" data-title="Index: "><%= count %></div>
+                <div class="cell" data-title="File name: ">
+                  <span>
+                    <i class="far fa-file"></i>
+                    <a data-href="/download?p=<%= encodeURI(file.path) %>&o=download" class="flinks"><%= file.name %></a>
+                  </span>
+                </div>
+                <div class="cell" data-title="Size: "><%= file.size %></div>
+              </div>
+              <% }%>
+              <% });%>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col-12">
-      <h2>List Files</h2>
-    </div>
-    <div class="wrap-table100">
-      <div class="table-table100">
-        <div class="row header">
-          <div class="cell">#</div>
-          <div class="cell">File Name</div>
-          <div class="cell">Size</div>
-
-        </div>
-        <% var count = 0;
-                var sizeFile = 0;
-                files.forEach(function(file){
-                if(file.type){ count++;%>
-        <div class="row">
-          <div class="cell" data-title="Index: "><%= count %></div>
-          <div class="cell" data-title="Folder name: ">
-            <span>
-              <i class="fas fa-folder-open mr-2"></i>
-              <a href="/browser/?p=<%= encodeURIComponent(file.path) %>" id="postPath"><%= file.name %></a>
-            </span>
-          </div>
-          <div class="cell" data-title="Size: "><%= file.size %></div>
-        </div>
-        <% }%>
-        <% });%>
-        <% files.forEach(function(file){ 
-                if(!file.type){ count++;%>
-        <div class="row">
-          <div class="cell" data-title="Index: "><%= count %></div>
-          <div class="cell" data-title="File name: ">
-            <span>
-              <i class="far fa-file"></i>
-              <a data-href="/download?p=<%= encodeURI(file.path) %>&o=download" class="flinks"><%= file.name %></a>
-            </span>
-          </div>
-          <div class="cell" data-title="Size: "><%= file.size %></div>
-        </div>
-        <% }%>
-        <% });%>
-      </div>
-    </div>
   </div>
 
 
