@@ -52,7 +52,7 @@ router.get('/browser', function (req, res, next) {
   var _path;
   if (req.query.p == null) _path = rootPath;
   else _path = req.query.p;
-  if (_path.includes(rootPath.replace('/', '\\')))
+  if (_path.includes(rootPath.replace('^', '/')))
     renderHomepage(res, _path);
   else res.render('filenotfound');
 });
@@ -67,8 +67,9 @@ router.get('/download', (req, res) => {
   //console.log(req.params.id);
   //console.log("path is: " + req.query.p + "," + rootPath);
   var _path = req.query.p;
+  console.log(_path);
   var _options = req.query.o;
-  if (_path.includes(rootPath.replace('/', '\\')))
+  if (_path.includes(rootPath))
     if(_options == 'download') res.download(_path, path.basename(_path));
   else res.render('filenotfound');
 });
