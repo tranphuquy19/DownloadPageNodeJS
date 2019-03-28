@@ -42,8 +42,8 @@
       </form>
     </div>
   </nav>
-  <div class="limiter">
-      <div class="container-table100 ml-0 mr-0 mt-2">
+  <div class="limiter bg-light">
+      <div class="container ml-0 mr-0 mt-2">
 
           <div class="modal fade" id="confirmDownload" tabindex="-1" role="dialog" aria-labelledby="confirmDownloadTitle"
             aria-hidden="true">
@@ -56,7 +56,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <video controls class="player" id="player1" height="100%" width="100%" loop poster="/images/dora-bell.jpg"
+                  <video controls class="player" id="player1" height="100%" width="100%" loop
                     preload="none" src="" style="max-width: 100%" tabindex="0" title="MediaElement">
                   </video>
                 </div>
@@ -127,12 +127,15 @@
       var _links = $(this).data('href');
       $('#downloadBtn').attr('href', _links);
       if (_links.includes('.mp4') || _links.includes('.flv') || _links.includes('.avi') || _links.includes('.webm')) {
+        $('#mDownload').hide();
         $('#player1').attr('src', _links);
+        $('video').show();
       }
       else {
-        $('.modal-body').empty();
+        $('#mDownload').remove();
         var addToBody = document.createElement('p');
         addToBody.class = 'text-muted';
+        addToBody.id = 'mDownload';
         addToBody.innerHTML = 'Bạn có muốn Download file: <b>' + $(this).text() + '</b> không ?'
         $('.modal-body').append(addToBody);
         $('video').hide();
