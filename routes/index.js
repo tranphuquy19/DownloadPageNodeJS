@@ -88,9 +88,12 @@ function countDownloads() {
 
 /* GET home page. */
 router.get('/browser', function (req, res, next) {
-  countViews();
+
   var _path;
-  if (req.query.p == null) _path = rootPath;
+  if (req.query.p == null) {
+    countViews();
+    _path = rootPath;
+  }
   else _path = req.query.p;
   if (_path.includes(rootPath.replace('^', '/')))
     renderHomepage(res, _path);

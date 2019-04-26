@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
+  <!-- Jetpack Open Graph Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Doraneko" />
+  <meta property="og:description" content="Press To Create Awesome Things." />
+  <meta property="og:url" content="http://doraneko.tk" />
+  <meta property="og:site_name" content="Doraneko" />
+  <meta property="og:image:width" content="200" />
+  <meta property="og:image:height" content="200" />
+  <meta property="og:image" content="http://doraneko.tk/images/dora-bell.jpg" />
+  <meta property="og:locale" content="vi_VN" />
+  <meta name="twitter:creator" content="@tranphuquy19" />
+  <meta name="twitter:site" content="@tranphuquy19" />
+  <meta http-equiv="content-language" content="vi,en" />
   <title>
     <%= title %>
   </title>
+  <link rel="alternate" href="http://doraneko.tk" hreflang="vi-vn" />
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
   <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
@@ -18,15 +31,14 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
   <link rel="shortcut icon" type="image/ico" href="/images/favicon.ico">
 </head>
-
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Doraneko</a>
+    <a class="navbar-brand" href="/"><b class="mr-2">Doraneko</b> <%= files.downloads%> <i
+        class="fas fa-cloud-download-alt"></i> / <%= files.views%> <i class="fas fa-street-view"></i> </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
@@ -34,9 +46,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="https://www.fb.com/tranphuquy19" target="_blank">Contact Me (fb)</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"><b><%= files.downloads%></b> <i class="fas fa-cloud-download-alt"></i>  <b>/ <%= files.views%></b> <i class="fas fa-street-view"></i> </a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -46,8 +55,7 @@
     </div>
   </nav>
   <div class="limiter bg-light">
-    <div class="container ml-0 mr-0 mt-2">
-
+    <div class="container-table100 ml-0 mr-0 mt-2">
       <div class="modal fade" id="confirmDownload" tabindex="-1" role="dialog" aria-labelledby="confirmDownloadTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -78,7 +86,6 @@
             <div class="cell">#</div>
             <div class="cell">File Name</div>
             <div class="cell">Size</div>
-
           </div>
           <% var count = 0;
           console.log(files);
@@ -116,8 +123,6 @@
       </div>
     </div>
   </div>
-
-
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
@@ -156,6 +161,14 @@
   </script>
   <script src="/javascripts/main.js"></script>
   <script src="/vendor/select2/select2.min.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137354777-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-137354777-1', { 'optimize_id': 'GTM-MLVFJTX'});
+  </script>
 </body>
 
 </html>
